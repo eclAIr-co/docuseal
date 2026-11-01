@@ -1,0 +1,39 @@
+# eclAIr's DocuSeal image (Keith, 1 Nov 2026). Every push to the eclair branch builds the image Render runs
+# (docuseal-sign) and puts it on GitHub's registry, free for a public repository. Render pulls :latest.
+name: eclAIr image
+
+on:
+  push:
+    branches: [eclair]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Version
+        run: echo "eclair-$(git rev-parse --short HEAD)" > .version
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ghcr.io/eclair-co/docuseal:latest
+            ghcr.io/eclair-co/docuseal:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -530,6 +530,7 @@ export default {
 
     if (this.$refs.canvas) {
       this.pad = new SignaturePad(this.$refs.canvas)
+      this.pad.penColor = getComputedStyle(document.documentElement).getPropertyValue('--ec-you').trim() || this.pad.penColor
 
       if (this.field.preferences?.color) {
         this.pad.penColor = this.field.preferences.color

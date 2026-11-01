@@ -1,0 +1,73 @@
+// eclAIr's look on DocuSeal (Keith, 1 Nov 2026; from eclAIr's design/samples/sign.html).
+// One file over DocuSeal's own styles, so pulling DocuSeal's updates stays one step.
+// Paper and night come from the daisyUI themes in tailwind.config.js; this file sets type, buttons, fields and the
+// few hard-coded colors. DocuSeal's attribution stays on every screen (its license, AGPL section 7(b)).
+
+@font-face { font-family: 'ET Book'; src: url('/fonts/et-book-roman-line-figures.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'ET Book'; src: url('/fonts/et-book-display-italic-old-style-figures.woff') format('woff'); font-style: italic; font-display: swap; }
+@font-face { font-family: 'ET Book'; src: url('/fonts/et-book-bold-line-figures.woff') format('woff'); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: 'Source Sans 3'; src: url('/fonts/source-sans-3-roman-300-600.woff2') format('woff2'); font-weight: 300 600; font-display: swap; }
+
+:root {
+  --ec-serif: 'ET Book', Palatino, Georgia, serif;
+  --ec-sans: 'Source Sans 3', -apple-system, 'Helvetica Neue', sans-serif;
+  --ec-card: #fefefe; --ec-rule: #e0e0dc; --ec-line: #c7c5bd; --ec-mute: #696969;
+  --ec-watch: #73879f; --ec-needed: #c06a3e; --ec-handled: #5a8a7a; --ec-you: #24324a;
+  --ec-needed-text: #9d5733; --ec-handled-text: #4a7164;
+}
+[data-theme='docuseal-night'] {
+  --ec-card: #25241f; --ec-rule: #3a3832; --ec-line: #5c5950; --ec-mute: #a39f95;
+  --ec-watch: #a7b9cf; --ec-needed: #e0895c; --ec-handled: #7fae9e; --ec-you: #a8b8d8;
+  --ec-needed-text: #e0895c; --ec-handled-text: #7fae9e;
+}
+
+// Type: ET Book for anything read, Source Sans 3 for small labels and buttons.
+body { font-family: var(--ec-serif); }
+h1, h2, h3, h4 { font-family: var(--ec-serif); font-weight: 400 !important; text-wrap: balance; }
+label, .label-text, .badge, .tab, .menu-title, th { font-family: var(--ec-sans); }
+
+// Buttons: square, quiet, ink on paper. The one that finishes the job is solid ink.
+.btn {
+  font-family: var(--ec-sans); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; font-size: 11px;
+  border-radius: 2px; box-shadow: none; animation: none;
+  background: transparent; color: hsl(var(--bc)); border: 1px solid var(--ec-rule);
+}
+.btn:hover { background: hsl(var(--bc) / .05); border-color: hsl(var(--bc)); }
+.btn-neutral, .base-button, .btn-primary {
+  background: transparent !important; color: hsl(var(--bc)) !important; border: 1px solid hsl(var(--bc)) !important;
+}
+.btn-neutral:hover, .base-button:hover, .btn-primary:hover { background: hsl(var(--bc)) !important; color: hsl(var(--b1)) !important; }
+.base-button { font-size: 12px; }
+.btn:focus-visible { outline: 2px solid var(--ec-watch); outline-offset: 2px; }
+.btn-disabled, .btn[disabled] { border-color: var(--ec-rule) !important; color: var(--ec-line) !important; background: transparent !important; }
+
+// Inputs: square, a hairline that turns ink in hand. What the signer types is in their ink.
+.input, .textarea, .select, .base-input, .base-textarea {
+  border-radius: 2px !important; border-color: var(--ec-line) !important; background: var(--ec-card) !important;
+  font-family: var(--ec-serif); font-size: 18px;
+}
+.input:focus, .textarea:focus, .select:focus { outline: none !important; border-color: hsl(var(--bc)) !important; }
+#signing_form_header h1 { font-family: var(--ec-serif); }
+
+// Fields on the document: dashed until filled, the one in hand carries the orange ring, a filled one is solid with sage.
+.ec-field { border: 1px dashed var(--ec-line); background: color-mix(in srgb, var(--ec-needed) 6%, transparent); }
+.ec-field-set { border-style: solid; border-color: var(--ec-line); border-bottom-color: var(--ec-handled); background: transparent; }
+.ec-field-on { border: 1px solid var(--ec-needed); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ec-needed) 22%, transparent); background: transparent; }
+.field-area-active-label { font-family: var(--ec-sans); letter-spacing: .1em; text-transform: uppercase; font-size: 10px !important; border-radius: 2px !important; }
+
+// The few colors DocuSeal sets by hand, read as eclAIr's signals. No red anywhere.
+.text-red-500, .text-error { color: var(--ec-needed-text) !important; }
+.text-green-600, .text-success { color: var(--ec-handled-text) !important; }
+.outline-red-500 { outline-color: var(--ec-needed) !important; }
+.bg-red-100 { background-color: color-mix(in srgb, var(--ec-needed) 10%, transparent) !important; }
+.border-red-100 { border-color: var(--ec-line) !important; }
+.alert-error, .alert-warning { background: transparent; border: 1px solid var(--ec-needed); color: var(--ec-needed-text); }
+
+// Night: DocuSeal paints some panels white by hand.
+[data-theme='docuseal-night'] .bg-white { background-color: var(--ec-card) !important; }
+[data-theme='docuseal-night'] .text-white { color: hsl(var(--b1)) !important; }
+
+// The attribution, kept, set quiet.
+.ec-by, .ec-by a { font-family: var(--ec-sans); font-size: 13px; color: var(--ec-mute); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

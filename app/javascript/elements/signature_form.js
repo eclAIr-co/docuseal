@@ -13,6 +13,8 @@ export default targetable(class extends HTMLElement {
 
     this.pad = new SignaturePad(this.canvas)
 
+    this.pad.penColor = getComputedStyle(document.documentElement).getPropertyValue('--ec-you').trim() || this.pad.penColor
+
     this.resizeObserver = new ResizeObserver(() => {
       requestAnimationFrame(() => {
         if (!this.canvas) return

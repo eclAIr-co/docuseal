@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex absolute lg:text-base -outline-offset-1 focus-visible:outline-blue-500 focus-visible:outline-2 focus-visible:outline field-area"
+    class="flex absolute lg:text-base -outline-offset-1 focus-visible:outline-secondary focus-visible:outline-2 focus-visible:outline field-area"
     dir="auto"
     :style="[computedStyle, fontStyle]"
-    :class="{ 'cursor-default': !submittable, 'border border-red-100 bg-red-100 cursor-pointer': submittable, 'border border-red-100': !isActive && submittable, 'bg-opacity-80': !isActive && !isValueSet && submittable, 'outline-red-500 outline-dashed outline-2 z-10 field-area-active': isActive && submittable, 'bg-opacity-40': (isActive || isValueSet) && submittable }"
+    :class="{ 'cursor-default': !submittable, 'ec-field cursor-pointer': submittable, 'ec-field-set': isValueSet && !isActive && submittable, 'ec-field-on z-10 field-area-active': isActive && submittable }"
     :role="submittable && !isNativeInputField ? 'button' : undefined"
     :tabindex="submittable && !isNativeInputField ? 0 : undefined"
     :aria-label="submittable && !isNativeInputField ? fieldAreaLabel : undefined"
