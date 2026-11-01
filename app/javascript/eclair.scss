@@ -24,7 +24,7 @@
 // Type: ET Book for anything read, Source Sans 3 for small labels and buttons.
 body { font-family: var(--ec-serif); }
 h1, h2, h3, h4 { font-family: var(--ec-serif); font-weight: 400 !important; text-wrap: balance; }
-label, .label-text, .badge, .tab, .menu-title, th { font-family: var(--ec-sans); }
+.badge, .tab, .menu-title, th { font-family: var(--ec-sans); }
 
 // Buttons: square, quiet, ink on paper. The one that finishes the job is solid ink.
 .btn {
@@ -65,7 +65,7 @@ label, .label-text, .badge, .tab, .menu-title, th { font-family: var(--ec-sans);
 
 // Night: DocuSeal paints some panels white by hand.
 [data-theme='docuseal-night'] .bg-white { background-color: var(--ec-card) !important; }
-[data-theme='docuseal-night'] .text-white { color: hsl(var(--b1)) !important; }
+[data-theme='docuseal-night'] .text-white:not(.btn) { color: hsl(var(--b1)) !important; }
 
 // The attribution, kept, set quiet.
 .ec-by, .ec-by a { font-family: var(--ec-sans); font-size: 13px; color: var(--ec-mute); }
